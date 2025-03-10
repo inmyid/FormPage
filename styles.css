@@ -5,8 +5,105 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh; /* Ubah dari height: 100vh */
     background-color: #FAF3E0;
+    padding-top: 60px; /* Sesuaikan dengan tinggi top bar */
+    overflow: auto; /* Tambahkan agar bisa di-scroll */
+}
+
+.popup-peringatan {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.popup-peringatan .popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+}
+
+.popup-peringatan h3 {
+    margin-bottom: 10px;
+    color: #c0392b;
+}
+
+.popup-peringatan p {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.popup-peringatan .btn-close {
+    background: #5A4231;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.popup-peringatan .btn-close:hover {
+    background: #8D6E63;
+}
+
+.hidden {
+    display: none;
+}
+
+.top-bar {
+    background-color: #5A4231;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Container utama */
+.container-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 60px; /* Tambahkan ini agar tidak tertutupi top-bar */
+}
+
+/* Styling banner */
+.banner {
+    background: linear-gradient(135deg, #8D6E63, #5A4231);
+    color: white;
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    margin-bottom: 20px;
+}
+
+.banner h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.banner p {
+    font-size: 16px;
+    margin-top: 5px;
+    opacity: 0.9;
 }
 
 .container {
@@ -15,20 +112,64 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 90%;
-    max-width: 400px;
+    max-width: 600px;
     text-align: center;
+    padding-top: 20px; /* Tambahkan padding untuk jarak */
+    margin-top: 20px; /* Atau bisa sesuaikan angkanya */
 }
 
 h2 {
     font-size: 22px;
     color: #5A4231;
     margin-bottom: 20px;
+    font-weight: 600;
+}
+
+label[for="kepalaKeluarga"],
+label[for="namaSuami"],
+label[for="namaIstri"],
+label[for="alamat"]
+.anak-container label {
+    font-weight: bold;
 }
 
 .form-group {
-    margin-bottom: 15px;
-    text-align: left;
+    display: flex;
+    align-items: center; /* Supaya checkbox dan label sejajar */
+    gap: 10px; /* Memberikan jarak antara checkbox dan label */
 }
+
+/* Khusus Nama Kepala Keluarga agar label tetap di atas input */
+.form-group:first-child {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+/* Untuk checkbox dan label tetap sejajar */
+.form-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 5px; /* Tambahkan jarak antara checkbox dan label */
+    vertical-align: middle; /* Supaya rata */
+}
+
+.form-group label {
+    text-align: left; /* Pastikan teks rata kiri */
+    vertical-align: middle; /* Pastikan sejajar */
+}
+
+.form-group label[for="alamat"] {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-weight: bold;
+}
+
+.form-group input#alamat {
+    width: 100%;
+}
+
 
 label {
     display: block;
@@ -37,12 +178,73 @@ label {
 }
 
 input, select {
-    width: 100%;
+    width: 97%;
     padding: 8px;
     margin-top: 5px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 14px;
+}
+
+.anak-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    margin-top: 8px; /* Menambah jarak di atas bagian anak */
+}
+
+.anak-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.anak-item input {
+    width: 198%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: 0px;
+}
+
+.anak-container label {
+    font-size: 14px;
+}
+
+/* Atur container agar radio button dan tombol hapus sejajar */
+.kehadiran-container {
+    display: flex;
+    flex-direction: column; /* Mengatur agar elemen tersusun ke bawah */
+    align-items: flex-start;
+    justify-content: space-between; /* Supaya tombol hapus di kanan */
+    gap: 10px;
+}
+
+.hapus-anak {
+    margin-left: auto !important;
+    background-color: #5A4231;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 8px; /* Mengecilkan tombol */
+    font-size: 10px;
+    width: auto; /* Supaya tidak selebar tombol submit */
+}
+
+.btn-small {
+    background-color: #5A4231;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 6px 10px; /* Mengecilkan tombol */
+    font-size: 14px;
+    width: auto; /* Supaya tidak selebar tombol submit */
 }
 
 .btn, .btn-submit, .btn-close {
@@ -61,6 +263,55 @@ input, select {
     background-color: #8D6E63;
 }
 
+/* Menambah jarak antara input kepala keluarga dan checkbox "Ada Suami" */
+#kepalaKeluarga {
+    margin-bottom: 8px; /* GAP: 15px */
+}
+
+.suami-container, .istri-container {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0px;
+    visibility: hidden; /* Mencegah perubahan layout */
+    height: 0; /* Menjaga ukuran awal agar tidak menyebabkan loncatan */
+    overflow: hidden; /* Mencegah kontennya muncul */
+    transition: height 0.3s ease-out; /* Animasi smooth */
+}
+
+.suami-container.show, .istri-container.show {
+    display: flex;
+    visibility: visible;
+    height: auto; /* Mengizinkan ukuran sesuai kontennya */
+}
+
+.suami-container input,
+.istri-container input {
+    margin-bottom: 8px; /* Tambahkan jarak bawah */
+}
+
+.radio-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px; /* Memberi jarak antara radio button */
+    flex-wrap: nowrap; /* Mencegah teks turun ke bawah */
+    margin-bottom: 8px;
+    flex-grow: 1; /* Membuat radio group mengisi ruang kosong */
+
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap; /* Mencegah teks turun ke bawah */
+}
+
+.radio-group input[type="radio"] {
+    margin: 0;
+}
+
 .popup {
     display: none;
     position: fixed;
@@ -77,9 +328,13 @@ input, select {
     background: white;
     padding: 20px;
     border-radius: 10px;
-    text-align: center;
+    text-align: left;
     width: 80%;
     max-width: 350px;
+}
+
+.popup-content h3 {
+    text-align: center; /* Judul tetap di tengah */
 }
 
 @media (max-width: 600px) {

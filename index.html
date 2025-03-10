@@ -1,95 +1,86 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Digital</title>
+    <title>Form Kehadiran Keluarga</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <div class="container">
-        <h2>Form Kehadiran Undangan</h2>
-        <form id="invitationForm">
-            <div class="form-group">
-                <label>Nama Lengkap:</label>
-                <input type="text" id="namaLengkap" required>
-            </div>
-            <div class="form-group">
-                <label>Nama Panggilan:</label>
-                <input type="text" id="namaPanggilan" required>
-            </div>
-            <div class="form-group">
-                <label>Kehadiran Suami:</label>
-                <select id="hadirSuami">
-                    <option value="">Tidak Ada</option>
-                    <option value="Hadir">Hadir</option>
-                    <option value="Tidak Hadir">Tidak Hadir</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Kehadiran Istri:</label>
-                <select id="hadirIstri">
-                    <option value="">Tidak Ada</option>
-                    <option value="Hadir">Hadir</option>
-                    <option value="Tidak Hadir">Tidak Hadir</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Anak:</label>
-                <div id="anakList"></div>
-                <button type="button" class="btn" onclick="tambahAnak()">Tambah Anak</button>
-            </div>
-            <button type="submit" class="btn-submit">Submit</button>
-        </form>
+    <div class="top-bar">
+        <h3>Form Kehadiran Keluarga</h3>
     </div>
-    
-    <div id="popup" class="popup">
-        <div class="popup-content">
-            <h3>Data Kehadiran</h3>
-            <p id="popupContent"></p>
-            <button onclick="tutupPopup()" class="btn-close">Tutup</button>
+    <div class="container-wrapper">
+        <div class="banner">
+            <h1>Arisan Keluarga Bahagia</h1>
+            <p>Silakan isi formulir kehadiran dengan lengkap</p>
+        </div>
+        <div class="container">
+            <form id="invitationForm">
+                <div class="form-group">
+                    <label><strong>Nama Kepala Keluarga:</strong></label>
+                    <input type="text" id="kepalaKeluarga" placeholder="Masukkan Nama Kepala Keluarga" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="checkbox" id="punyaSuami" onchange="toggleForm('suamiContainer', 'punyaSuami')">
+                    <label for="punyaSuami">Ada Suami</label>
+                </div>
+
+                <div class="form-group suami-container" id="suamiContainer" style="display: none;">
+                    <label for="namaSuami">Nama Suami:</label>
+                    <input type="text" id="namaSuami" placeholder="Masukkan Nama Suami">
+
+                    <label>Kehadiran:</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="hadirSuami" value="Hadir"> Hadir</label>
+                        <label><input type="radio" name="hadirSuami" value="Tidak Hadir"> Tidak Hadir</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="checkbox" id="punyaIstri" onchange="toggleForm('istriContainer', 'punyaIstri')">
+                    <label for="punyaIstri">Ada Istri</label>
+                </div>
+
+                <div class="form-group istri-container" id="istriContainer" style="display: none;">
+                    <label for="namaIstri">Nama Istri:</label>
+                    <input type="text" id="namaIstri" placeholder="Masukkan Nama Istri">
+
+                    <label>Kehadiran:</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="hadirIstri" value="Hadir"> Hadir</label>
+                        <label><input type="radio" name="hadirIstri" value="Tidak Hadir"> Tidak Hadir</label>
+                    </div>
+                </div>
+
+                <div class="anak-container">
+                    <label>Anak:</label>
+                    <div id="anakList"></div>
+                    <button type="button" class="btn-small" onclick="tambahAnak()">Tambah Anak</button>
+                </div>
+
+                <div class="form-group">
+                    <label><strong>Alamat:</strong></label>
+                    <input type="text" id="alamat" placeholder="Masukkan Alamat Lengkap" required>
+                </div>
+
+                <button type="submit" class="btn-submit">Submit</button>
+            </form>
         </div>
     </div>
-    
-    <script>
-        function tambahAnak() {
-            const anakList = document.getElementById("anakList");
-            const index = anakList.children.length;
-            const div = document.createElement("div");
-            div.classList.add("anak-item");
-            div.innerHTML = `Anak ${index + 1}: <select name="hadirAnak">
-                <option value="Hadir">Hadir</option>
-                <option value="Tidak Hadir">Tidak Hadir</option>
-            </select>`;
-            anakList.appendChild(div);
-        }
 
-        document.getElementById("invitationForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            
-            const namaPanggilan = document.getElementById("namaPanggilan").value;
-            const hadirSuami = document.getElementById("hadirSuami").value || "-";
-            const hadirIstri = document.getElementById("hadirIstri").value || "-";
-            
-            let anakData = "";
-            document.querySelectorAll("select[name='hadirAnak']").forEach((anak, index) => {
-                anakData += `Anak ${index + 1}: ${anak.value}<br>`;
-            });
-            if (!anakData) anakData = "Tidak Ada Anak";
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <h3>Data Kehadiran</h3>
+                <p id="popupContent"></p>
+                <button onclick="tutupPopup()" class="btn-close">Tutup</button>
+            </div>
+        </div>
 
-            document.getElementById("popupContent").innerHTML = `
-                <strong>Nama Panggilan:</strong> ${namaPanggilan}<br>
-                <strong>Kehadiran Suami:</strong> ${hadirSuami}<br>
-                <strong>Kehadiran Istri:</strong> ${hadirIstri}<br>
-                <strong>${anakData}</strong>
-            `;
-            
-            document.getElementById("popup").style.display = "flex";
-        });
-
-        function tutupPopup() {
-            document.getElementById("popup").style.display = "none";
-        }
-    </script>
+        <script src="script.js"></script>
 </body>
+
 </html>
