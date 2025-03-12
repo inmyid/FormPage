@@ -7,8 +7,15 @@ body {
     align-items: center;
     min-height: 100vh; /* Ubah dari height: 100vh */
     background-color: #FAF3E0;
-    padding-top: 60px; /* Sesuaikan dengan tinggi top bar */
+    /*padding-top: 60px; /* Sesuaikan dengan tinggi top bar */
     overflow: auto; /* Tambahkan agar bisa di-scroll */
+    /*latar belakang */
+    background-image: url('img/bg.jpg'); /* Menggunakan path folder img */
+    background-size: cover; /* Agar gambar menutupi seluruh layar */
+    background-position: center;
+    background-repeat: no-repeat;
+
+    
 }
 
 .popup-peringatan {
@@ -107,7 +114,7 @@ body {
 }
 
 .container {
-    background: #fff;
+    /*background: #fff;*/
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
