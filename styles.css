@@ -10,7 +10,7 @@ body {
     /*padding-top: 60px; /* Sesuaikan dengan tinggi top bar */
     overflow: auto; /* Tambahkan agar bisa di-scroll */
     /*latar belakang */
-    background-image: url('img/bg.jpg'); /* Menggunakan path folder img */
+    background-image: url('img/backround.jpg');
     background-size: cover; /* Agar gambar menutupi seluruh layar */
     background-position: center;
     background-repeat: no-repeat;
